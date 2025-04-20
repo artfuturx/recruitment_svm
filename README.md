@@ -108,7 +108,7 @@ Aşağıda her bir SVM modelinin karar sınırı grafikleri yer almaktadır:
 ![Polynomial](images/models_images/poly.png)
 
 ### Sigmoid SVM
-![Sigmoid](images/models_images/sigmmoid.png)
+![Sigmoid](images/models_images/sigmoid.png)
 
 LINEAR: Basit ve anlaşılır, ancak karmaşık ilişkileri yakalayamıyor
 POLY: Orta seviyede karmaşıklık, daha esnek bir sınır sunuyor
