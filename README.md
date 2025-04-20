@@ -87,11 +87,12 @@ POST //predict/{model_name}
 
 Aşağıda Swagger UI arayüzünde API'nin nasıl test edildiğini gösteren ekran görüntüleri yer almaktadır:
 
+### Linear Model ile Tahmin
+![Swagger Linear](images/swagger_ss/predict_endpoint_linear.png)
+
 ### Ana Swagger Ekranı
 ![Swagger](images/swagger_ss/predict_endpoint.png)
 
-### Linear Model ile Tahmin
-![Swagger Linear](images/swagger_ss/predict_endpoint_linear.png)
 
 ## SVM Model Karar Sınırları
 
@@ -109,8 +110,16 @@ Aşağıda her bir SVM modelinin karar sınırı grafikleri yer almaktadır:
 ### Sigmoid SVM
 ![Sigmoid](images/models_images/sigmmoid.png)
 
+LINEAR: Basit ve anlaşılır, ancak karmaşık ilişkileri yakalayamıyor
+POLY: Orta seviyede karmaşıklık, daha esnek bir sınır sunuyor
+RBF: En iyi dengeyi sağlıyor, mantıklı bir şekilde az tecrübeli adayları filtreliyor
+SIGMOID: Bu veri seti için uygun değil, mantıksız sınıflandırmalar yapıyor
+
+Pratikte RBF kernel en iyi seçenek gibi görünüyor çünkü hem az tecrübeli/düşük puanlı adayları doğru şekilde filtreliyor hem de tecrübeli adaylar için uygun bir değerlendirme yapıyor. LINEAR kernel de basitliği nedeniyle tercih edilebilir, ancak daha karmaşık ilişkileri yakalama konusunda sınırlı kalabilir.
+
+
 ---
 
 ## Geliştiren
-- **Proje Sahibi:** [SEVGİ BERK SÜTBAŞ]
+- **Proje Sahibi:** SEVGİ BERK SÜTBAŞ
 - **Teslim Tarihi:** 21 Nisan 2025

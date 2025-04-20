@@ -31,6 +31,44 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 import joblib
+import os
+
+
+def plot_decision_boundary_matplotlib(X, y, model, scaler, title):
+    plt.figure(figsize=(10, 8))
+    
+    x_min, x_max = X['years_experience'].min() - 1, X['years_experience'].max() + 1
+    y_min, y_max = X['technical_score'].min() - 1, X['technical_score'].max() + 1
+    
+    xx, yy = np.meshgrid(np.linspace(x_min, x_max, 100),
+                        np.linspace(y_min, y_max, 100))
+    
+    grid = np.c_[xx.ravel(), yy.ravel()]
+    grid_scaled = scaler.transform(grid)
+    Z = model.predict(grid_scaled)
+    Z = Z.reshape(xx.shape)
+    
+    plt.contourf(xx, yy, Z, alpha=0.3, cmap=plt.cm.coolwarm)
+    
+    plt.contour(xx, yy, Z, colors='k', linestyles='-', linewidths=1)
+    
+    scatter = plt.scatter(X['years_experience'], X['technical_score'], 
+                        c=y, s=50, cmap=plt.cm.coolwarm, edgecolors='k')
+    
+    plt.xlabel('Years of Experience')
+    plt.ylabel('Technical Score')
+    plt.title(f'Decision Boundary ({title})')
+    plt.grid(True, alpha=0.3)
+    
+    plt.legend(*scatter.legend_elements(), 
+             title="Classes", loc="upper right")
+    
+    plt.xlim(xx.min(), xx.max())
+    plt.ylim(yy.min(), yy.max())
+    
+    plt.savefig(f'images/models_images/{title.lower()}.png')
+    plt.tight_layout()
+    plt.show()
 
 df = pd.read_csv('candidates_data_faker.csv')
 
@@ -47,7 +85,6 @@ X_test_scaled = scaler.transform(X_test)
 
 joblib.dump(scaler, 'models/scaler.pkl')
 
-# 4 farklı SVM modeli tanımlandı
 model_configs = {
     'linear': SVC(kernel='linear', probability=True, random_state=42),
     'rbf': SVC(kernel='rbf', probability=True, random_state=42),
@@ -55,7 +92,6 @@ model_configs = {
     'sigmoid': SVC(kernel='sigmoid', probability=True, random_state=42)
 }
 
-# 4 farklı SVM modelini eğitildi, kaydedildi ve kara sınırları çizildi.
 for name, model in model_configs.items():
     print(f"\nModel: {name}")
     
@@ -70,24 +106,5 @@ for name, model in model_configs.items():
     print(classification_report(y_test, y_pred))
 
     joblib.dump(model, f'models/svm_{name}.pkl')
-
-    def plot_decision_boundary_matplotlib(X, y, model, scaler, title):
-        x_min, x_max = X['years_experience'].min() - 1, X['years_experience'].max() + 1
-        y_min, y_max = X['technical_score'].min() - 1, X['technical_score'].max() + 1
-        xx, yy = np.meshgrid(np.linspace(x_min, x_max, 200),
-                             np.linspace(y_min, y_max, 200))
-        
-        grid = np.c_[xx.ravel(), yy.ravel()]
-        grid_scaled = scaler.transform(grid)
-        preds = model.predict(grid_scaled).reshape(xx.shape)
-
-        plt.contour(xx, yy, preds, levels=[0.5], cmap="Greys", linestyles='--')
-        plt.scatter(X['years_experience'], X['technical_score'], c=y, cmap='coolwarm', edgecolors='k')
-        plt.xlabel('Years of Experience')
-        plt.ylabel('Technical Score')
-        plt.title(f'Decision Boundary ({title})')
-        plt.grid(True, alpha=0.3)
-        plt.tight_layout()
-        plt.show()
 
     plot_decision_boundary_matplotlib(X, y, model, scaler, title=name.upper())
