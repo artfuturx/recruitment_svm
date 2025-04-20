@@ -101,22 +101,24 @@ Aşağıda her bir SVM modelinin karar sınırı grafikleri yer almaktadır:
 ### Linear SVM
 ![Linear](images/models_images/linear.png)
 
-### RBF SVM
-![RBF](images/models_images/rbf.png)
-
 ### Polynomial SVM
 ![Polynomial](images/models_images/poly.png)
+
+### RBF SVM
+![RBF](images/models_images/rbf.png)
 
 ### Sigmoid SVM
 ![Sigmoid](images/models_images/sigmoid.png)
 
-LINEAR: Basit ve anlaşılır, ancak karmaşık ilişkileri yakalayamıyor
-POLY: Orta seviyede karmaşıklık, daha esnek bir sınır sunuyor
-RBF: En iyi dengeyi sağlıyor, mantıklı bir şekilde az tecrübeli adayları filtreliyor
-SIGMOID: Bu veri seti için uygun değil, mantıksız sınıflandırmalar yapıyor
+Grafikler Hakkında Genel Yorum:
 
-Pratikte RBF kernel en iyi seçenek gibi görünüyor çünkü hem az tecrübeli/düşük puanlı adayları doğru şekilde filtreliyor hem de tecrübeli adaylar için uygun bir değerlendirme yapıyor. LINEAR kernel de basitliği nedeniyle tercih edilebilir, ancak daha karmaşık ilişkileri yakalama konusunda sınırlı kalabilir.
+- Mavi noktalar (Class 0): İşe alınan adayları temsil ediyor
+- Kırmızı noktalar (Class 1): İşe alınmayan adayları temsil ediyor
+- Mavi bölgeler: İşe alınması önerilen bölgeler
+- Pembe bölgeler: İşe alınmaması önerilen bölgeler
+- Siyah çizgiler: Modelin belirlediği karar sınırları
 
+- Sonuç olarak RBF nin en iyi dengeyi sağladığı ve filtrelemeyi yaptığı gözlemlenmiştir.
 
 ---
 
