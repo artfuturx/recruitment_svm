@@ -1,5 +1,5 @@
 # Recruitment SVM Prediction 
-# Candidate Evaluation using SVM for Recruitment
+İşe Alımda Aday Seçimi: SVM ile Başvuru Değerlendirme
 
 Bu proje, adayların teknik puanı ve iş deneyimine göre işe alınıp alınmayacağına karar veren bir makine öğrenmesi uygulamasıdır. Model eğitimi, görselleştirme ve API ile tahmin yapma işlemleri Python ile gerçekleştirilmiştir.
 
